@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Define la codificación de caracteres como UTF-8 para que la página pueda mostrar una amplia gama de caracteres correctamente. -->
+<meta charset="UTF-8">
+
+<!-- Configura la página para que sea responsiva en dispositivos móviles. Esto asegura que la página se adapte al tamaño de la pantalla del dispositivo. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Incluye la hoja de estilos de Bootstrap desde un CDN para aplicar el estilo y el diseño responsivo a la página. -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+<!-- Enlace a la hoja de estilos de Boxicons para incluir iconos en la interfaz de usuario. -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+<!-- Título de la página que aparecerá en la pestaña del navegador. -->
+<title>CRUD</title>
+</head>
+<body>
+
+<!-- Barra de navegación con estilo oscuro utilizando Bootstrap. -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <!-- Barra de navegación secundaria (vacía, no utilizada aquí). -->
+        <nav class="navbar navbar-dark"></nav>
+
+        <!-- Botón para alternar el menú de navegación en pantallas pequeñas. -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenido de la barra de navegación que se colapsa en pantallas pequeñas. -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Enlace al inicio de la página. -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenedor principal que contiene la lista de usuarios y las opciones para crear, editar o eliminar registros. -->
+<div class="container">
+  
+    <!-- Botón para agregar un nuevo registro. Utiliza un icono de Boxicons. -->
+    <a href="/create" class="btn btn-outline-primary mt-4">
+        <i class='bx bxs-plus-circle bx-md'></i>
+    </a>
+
+    <!-- Tabla que muestra la lista de usuarios con sus ID, nombre y rol. -->
+    <table class="table table-bordered table-striped text-center mt-4">
+        <thead>
+            <!-- Fila de encabezado con los títulos de las columnas. -->
+            <tr class="bg-primary text-white">
+                <th scope="col">ID</th>
+                <th scope="col">USUARIO</th>
+                <th scope="col">ROL</th>
+                <th scope="col">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Se itera sobre el array 'results' (presumiblemente una lista de usuarios) y se muestra una fila para cada usuario. -->
+            <% results.forEach((user) => { %>
+                <tr>
+                    <!-- Muestra el ID del usuario. -->
+                    <td><%= user.id %></td>
+                    
+                    <!-- Muestra el nombre de usuario. -->
+                    <td><%= user.user %></td>
+                    
+                    <!-- Muestra el rol del usuario. -->
+                    <td><%= user.rol %></td>
+                    
+                    <!-- Botones de acción para editar y eliminar un usuario, con iconos de Boxicons. -->
+                    <td>
+                        <!-- Botón para editar el usuario, redirige a la ruta de edición del usuario correspondiente. -->
+                        <a href="/edit/<%= user.id %>" class="btn btn-outline-info">
+                            <i class='bx bxs-edit'></i>
+                        </a>
+                        
+                        <!-- Botón para eliminar el usuario, redirige a la ruta de eliminación del usuario correspondiente. -->
+                        <a href="/delete/<%= user.id %>" class="btn btn-outline-danger">
+                            <i class='bx bxs-trash-alt'></i>
+                        </a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Script necesario para que los componentes interactivos de Bootstrap funcionen correctamente (como el colapso del menú). -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</body>
+</html>

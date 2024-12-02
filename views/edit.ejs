@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Define la codificación de caracteres como UTF-8 para admitir una amplia gama de caracteres. -->
+<meta charset="UTF-8">
+
+<!-- Configura la página para que sea responsiva en dispositivos móviles. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Incluye la hoja de estilos de Bootstrap desde un CDN para darle estilo a la página. -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+<!-- Enlace a tu hoja de estilos personalizada (styles.css) para personalizar aún más el diseño. -->
+<link href="styles.css" rel="stylesheet">
+
+<!-- Título de la página que aparecerá en la pestaña del navegador. -->
+<title>CRUD</title>
+</head>
+<body>
+
+<!-- Barra de navegación con estilo oscuro de Bootstrap -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <!-- Barra de navegación secundaria (vacía, no se está utilizando). -->
+    <nav class="navbar navbar-dark"></nav>
+
+    <!-- Botón para colapsar y expandir el menú de navegación en pantallas pequeñas. -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del menú de navegación, que se colapsa en pantallas pequeñas. -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Enlace de navegación que redirige al inicio. -->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Condición que verifica si existe un objeto 'user' (esto es parte de la sintaxis de EJS). -->
+<% if (user) { %>
+
+<!-- Contenedor de la página, con margen superior (mt-4). -->
+<div class="container mt-4">
+  
+  <!-- Tarjeta con borde secundario para mostrar el formulario de edición de registro. -->
+  <div class="card border-secondary">
+
+    <!-- Título de la tarjeta. -->
+    <div class="card-header">Editar Registro</div>
+
+    <!-- Cuerpo de la tarjeta que contiene el formulario. -->
+    <div class="card-body">
+      
+      <!-- Formulario con acción POST que se envía a la ruta '/update'. -->
+      <form action="/update" method="POST">
+        
+        <!-- Campo oculto para enviar el ID del usuario (usado para identificar el registro a actualizar). -->
+        <input id="id" name="id" value="<%= user.id %>" hidden>
+        
+        <!-- Campo de texto para el nombre de usuario, con valor predeterminado extraído del objeto 'user'. -->
+        <div class="mb-3">
+          <label for="user" class="form-label">Usuario</label>
+          <input type="text" class="form-control" id="user" name="user" tabindex="1" value="<%= user.user  %>">
+        </div>
+
+        <!-- Sección para mostrar y editar el rol del usuario. -->
+        <div class="mb-3">
+          <h3><%= user.rol %></h3> <!-- Muestra el rol actual del usuario. -->
+          <label for="rol" class="form-label">Rol</label>
+          <!-- Menú desplegable con opciones para seleccionar el rol del usuario. -->
+          <select id="rol" name="rol" class="form-select" tabindex="2">
+            <!-- Marca como seleccionado el rol correspondiente al usuario. -->
+            <option <%= user.rol=='alumno' ? "selected" : '' %> value="alumno">alumno</option>
+            <option <%= user.rol=='maestro' ? "selected" : '' %> value="maestro">maestro</option>
+            <option <%= user.rol=='director'? "selected" : '' %> value="director">director</option>
+            <option <%= user.rol=='administrador'? "selected" : '' %> value="administrador">administrador</option>
+          </select>
+        </div>
+
+        <!-- Botón para enviar el formulario y guardar los cambios. -->
+        <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
+
+        <!-- Enlace para cancelar y volver a la página principal. -->
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Fin de la condición EJS que solo se ejecuta si 'user' existe. -->
+<% } %>
+
+<!-- Script necesario para las funcionalidades interactivas de Bootstrap, como el menú desplegable. -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</body>
+</html>
